@@ -4,8 +4,10 @@ import { ArrowLeft, ArrowRight, Maximize2 } from 'lucide-react'
 import GlareHover from '../components/reactbits/GlareHover'
 import { Reveal } from '../components/ui/Reveal'
 import { Lightbox } from '../components/ui/Lightbox'
+import { CATEGORY_BADGE_CLASS } from '../components/projects/categoryBadge'
 import { PlaceholderPage } from './PlaceholderPage'
-import { projects } from '../data/projects'
+import { countWord } from '../lib/format'
+import { CATEGORY_DESCRIPTIONS, CATEGORY_LABELS, projects } from '../data/projects'
 
 export function ProjectDetailPage() {
   const { slug } = useParams()
@@ -22,14 +24,13 @@ export function ProjectDetailPage() {
         index="404"
         eyebrow="Not Found"
         title="Case study not found"
-        description="That project doesn't exist — but six real ones do, one page back."
+        description={`That project doesn't exist — but ${countWord(projects.length)} real ones do, one page back.`}
       />
     )
   }
 
   const previous = projects[(projectIndex - 1 + projects.length) % projects.length]
   const next = projects[(projectIndex + 1) % projects.length]
-  const isClientWork = project.category === 'freelance'
 
   const lightboxItems = project.images.map((src, i) => ({
     src,
@@ -56,10 +57,10 @@ export function ProjectDetailPage() {
           <div className="flex flex-wrap items-center gap-3">
             <span
               className={`px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] ${
-                isClientWork ? 'bg-gold text-ink' : 'border border-line text-fog'
+                CATEGORY_BADGE_CLASS[project.category]
               }`}
             >
-              {isClientWork ? 'Client Work' : 'Academic'}
+              {CATEGORY_LABELS[project.category]}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-fog">
               {project.role}
@@ -129,7 +130,8 @@ export function ProjectDetailPage() {
             <div>
               <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold">Type</dt>
               <dd className="mt-2 text-sm text-ivory">
-                {isClientWork ? 'Freelance client project' : 'Academic project'}
+                {CATEGORY_DESCRIPTIONS[project.category]}
+                {project.organization && ` — ${project.organization}`}
               </dd>
             </div>
             <div>

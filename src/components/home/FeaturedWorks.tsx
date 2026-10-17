@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 import SpotlightCard from '../reactbits/SpotlightCard'
 import { SectionHeading } from '../ui/SectionHeading'
 import { Reveal } from '../ui/Reveal'
-import { featuredProjects } from '../../data/projects'
+import { CATEGORY_LABELS, featuredProjects } from '../../data/projects'
 
 const GOLD_SPOTLIGHT = 'rgba(198, 161, 91, 0.10)' as const
 
@@ -59,7 +59,7 @@ export function FeaturedWorks() {
                   <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em]">
                     <span className="text-gold">0{index + 1}</span>
                     <span className="text-fog">
-                      {project.category === 'freelance' ? 'Client Work' : 'Academic'}
+                      {CATEGORY_LABELS[project.category]}
                     </span>
                   </div>
                   <h3 className="font-display text-3xl font-semibold text-ivory md:text-4xl">

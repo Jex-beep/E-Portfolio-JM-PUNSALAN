@@ -1,9 +1,12 @@
 import TiltedCard from '../reactbits/TiltedCard'
 import { SectionHeading } from '../ui/SectionHeading'
 import { Reveal } from '../ui/Reveal'
+import { countWord } from '../../lib/format'
+import { projects } from '../../data/projects'
 
 const FACTS = [
   'BSIT — Holy Angel University',
+  'Intern — Clark International Airport Corp.',
   'Expected graduation: April 2027',
   "President's / Dean's Lister",
 ] as const
@@ -41,8 +44,9 @@ export function AboutIntro() {
             <p className="mt-5 leading-relaxed text-fog">
               I care about the full picture. I design in Figma before I code, I build backends
               I&rsquo;d trust with real data, and I test like a QA engineer because I&rsquo;ve been
-              one. That end-to-end habit is what let me ship six projects — including client work —
-              before graduating.
+              one. That end-to-end habit is what let me ship {countWord(projects.length)} projects —
+              including client work and internship systems for Clark International Airport
+              Corporation — before graduating.
             </p>
           </Reveal>
           <Reveal delay={0.26}>

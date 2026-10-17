@@ -46,13 +46,14 @@ export const journey: readonly JourneyChapter[] = [
   {
     num: '04',
     years: '2026 — 2027',
-    title: 'Client-Ready',
+    title: 'Industry-Ready',
     story:
-      'Fourth year is about proving it in the real world: GT Garage shipped as my first freelance client project, CAMPASS brings real-time queueing to my own university, and GA4 + SEO certifications round out the product skillset. Next stop — internship and graduation, April 2027.',
+      'Fourth year is about proving it in the real world. GT Garage shipped as my first freelance client project, and my internship at Clark International Airport Corporation put me inside its MIS Division — building a document tracking system and a corporation-wide risk management platform. CAMPASS brought real-time queueing to my own university, while React, C#, GA4 and SEO certifications widened the toolkit. Next stop — graduation, April 2027.',
     milestones: [
+      'CIAC internship — MISD',
+      'Risk Management & Document Tracking systems',
       'GT Garage — freelance client delivery',
-      'CAMPASS — real-time campus queueing',
-      'Google Analytics & SEO certifications',
+      'ReactJS, C#, Google Analytics & SEO certifications',
     ],
   },
 ]

@@ -2,6 +2,7 @@ import { AboutIntro } from '../components/about/AboutIntro'
 import { JourneyTimeline } from '../components/about/JourneyTimeline'
 import { TestimonialsCarousel } from '../components/about/TestimonialsCarousel'
 import { CertificatesGallery } from '../components/about/CertificatesGallery'
+import { certifications } from '../data/certifications'
 
 export function AboutPage() {
   return (
@@ -9,7 +10,7 @@ export function AboutPage() {
       <title>About — Julien Michael Punsalan</title>
       <meta
         name="description"
-        content="About Julien Michael Punsalan — fourth-year BSIT student at Holy Angel University, his four-year journey as a web developer, testimonials, and 19 professional certifications."
+        content={`About Julien Michael Punsalan — fourth-year BSIT student at Holy Angel University and intern at Clark International Airport Corporation, his four-year journey as a web developer, testimonials, and ${certifications.length} professional certifications.`}
       />
       <header className="container-x pt-32 md:pt-44">
         <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">

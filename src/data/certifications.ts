@@ -3,10 +3,26 @@ export interface Certification {
   issuer: string
   year: number
   image: string
+  /** Public verification link issued by the provider */
+  credentialUrl?: string
 }
 
 /** Sorted newest first; the gallery preserves this order. */
 export const certifications: readonly Certification[] = [
+  {
+    title: 'ReactJS for Beginners',
+    issuer: 'Simplilearn | SkillUp',
+    year: 2026,
+    image: '/certifications/reactjs-beginners.png',
+    credentialUrl: 'https://simpli-web.app.link/e/gY92L002i7b',
+  },
+  {
+    title: 'Boost Your Web Development Career: Introduction to C#',
+    issuer: 'Simplilearn | SkillUp',
+    year: 2026,
+    image: '/certifications/introduction-csharp.png',
+    credentialUrl: 'https://simpli-web.app.link/e/6FuA6iu4i7b',
+  },
   {
     title: 'Google Analytics Certification',
     issuer: 'Google Analytics',

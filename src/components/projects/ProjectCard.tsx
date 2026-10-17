@@ -1,7 +1,8 @@
 import { Link } from 'react-router'
 import { ArrowUpRight } from 'lucide-react'
 import SpotlightCard from '../reactbits/SpotlightCard'
-import type { Project } from '../../data/projects'
+import { CATEGORY_BADGE_CLASS } from './categoryBadge'
+import { CATEGORY_LABELS, type Project } from '../../data/projects'
 
 const GOLD_SPOTLIGHT = 'rgba(198, 161, 91, 0.10)' as const
 
@@ -11,8 +12,6 @@ type ProjectCardProps = {
 }
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
-  const isClientWork = project.category === 'freelance'
-
   return (
     <SpotlightCard
       className="group h-full !rounded-2xl !border-line !bg-ink-2 !p-0"
@@ -40,12 +39,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           </div>
           <span
             className={`absolute top-4 left-4 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] ${
-              isClientWork
-                ? 'bg-gold text-ink'
-                : 'border border-line bg-ink/70 text-fog backdrop-blur-sm'
+              CATEGORY_BADGE_CLASS[project.category]
             }`}
           >
-            {isClientWork ? 'Client Work' : 'Academic'}
+            {CATEGORY_LABELS[project.category]}
           </span>
         </div>
 

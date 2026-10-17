@@ -4,6 +4,8 @@ import BlurText from '../reactbits/BlurText'
 import RotatingText from '../reactbits/RotatingText'
 import CountUp from '../reactbits/CountUp'
 import { Reveal } from '../ui/Reveal'
+import { CATEGORY_IS_INDUSTRY, projects } from '../../data/projects'
+import { certifications } from '../../data/certifications'
 
 const ROLES = [
   'Full-Stack Developer',
@@ -13,11 +15,13 @@ const ROLES = [
   'QA Tester',
 ]
 
+const industryProjectCount = projects.filter(p => CATEGORY_IS_INDUSTRY[p.category]).length
+
 const STATS = [
-  { value: 6, suffix: '', label: 'Projects Shipped' },
-  { value: 19, suffix: '', label: 'Certifications Earned' },
+  { value: projects.length, suffix: '', label: 'Projects Shipped' },
+  { value: certifications.length, suffix: '', label: 'Certifications Earned' },
+  { value: industryProjectCount, suffix: '', label: 'Industry Projects' },
   { value: 5, suffix: '+', label: 'Tech Stacks' },
-  { value: 1, suffix: '', label: 'Client Delivered' },
 ] as const
 
 export function Hero() {

@@ -12,6 +12,54 @@ export interface SkillGroup {
   skills: readonly string[]
 }
 
+export interface Experience {
+  role: string
+  organization: string
+  unit: string
+  location: string
+  period: string
+  duties: readonly string[]
+  projects: readonly ResumeProject[]
+}
+
+export const experience: readonly Experience[] = [
+  {
+    role: 'IT Intern',
+    organization: 'Clark International Airport Corporation (CIAC)',
+    unit: 'Management Information Systems Division (MISD)',
+    location: 'Clark Freeport Zone, Pampanga',
+    period: '2026',
+    duties: [
+      'Provided technical support to CIAC employees and departments.',
+      'Assisted the MIS team with network maintenance and troubleshooting.',
+      'Designed and built two internal web systems for the MIS Division, below.',
+    ],
+    projects: [
+      {
+        slug: 'risk-management-system',
+        title: 'Risk Management System',
+        subtitle: 'Corporation-wide Risk Register & Analytics',
+        bullets: [
+          'Built a risk register where departments file reports scored by Risk Priority Number, validated by IQAC through a review queue.',
+          'Developed an analytics dashboard with risk classification, per-department breakdowns and a severity heat map.',
+          'Implemented role-based access, user management with an enforced password policy, and an account activity log.',
+        ],
+        tools: 'React, Node.js, MySQL',
+      },
+      {
+        slug: 'misd-document-tracking',
+        title: 'MISD Document Tracking System',
+        subtitle: 'Incoming & Outgoing Document Log',
+        bullets: [
+          'Replaced paper routing logs with auto-numbered document records tracked through incoming and outgoing rounds.',
+          'Added status tracking, live counters, search, filters and data export for MISD staff.',
+        ],
+        tools: 'React, Node.js, MySQL',
+      },
+    ],
+  },
+]
+
 export const CAREER_OBJECTIVE =
   'Motivated BSIT student specializing in web and mobile application development, seeking an internship or entry-level position where I can apply front-end development, UI design, and system analysis skills while gaining professional industry experience.'
 
@@ -80,12 +128,17 @@ export const skillGroups: readonly SkillGroup[] = [
       'JavaScript',
       'TypeScript',
       'Dart (Flutter)',
+      'React',
       'Vue.js',
       'Angular',
+      'Node.js',
+      'MySQL',
       'UI/UX Design',
       'Front-End Development',
       'Back-End Development',
       'QA Testing',
+      'Technical Support',
+      'Networking',
     ],
   },
   {

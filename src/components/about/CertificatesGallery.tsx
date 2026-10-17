@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { ArrowUpRight } from 'lucide-react'
 import { SectionHeading } from '../ui/SectionHeading'
 import { Reveal } from '../ui/Reveal'
 import { Lightbox } from '../ui/Lightbox'
@@ -84,6 +85,18 @@ export function CertificatesGallery() {
                   {cert.issuer} · {cert.year}
                 </p>
               </button>
+              {cert.credentialUrl && (
+                <a
+                  href={cert.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-flex items-center gap-1.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-gold transition-colors hover:text-gold-bright"
+                >
+                  Verify credential
+                  <span className="sr-only">: {cert.title} (opens in new tab)</span>
+                  <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+                </a>
+              )}
             </Reveal>
           </li>
         ))}

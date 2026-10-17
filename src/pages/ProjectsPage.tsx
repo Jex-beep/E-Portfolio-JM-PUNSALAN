@@ -1,14 +1,19 @@
 import { useState } from 'react'
 import { Reveal } from '../components/ui/Reveal'
 import { ProjectCard } from '../components/projects/ProjectCard'
-import { projects, type ProjectCategory } from '../data/projects'
+import { countWord } from '../lib/format'
+import {
+  CATEGORY_LABELS,
+  PROJECT_CATEGORIES,
+  projects,
+  type ProjectCategory,
+} from '../data/projects'
 
 type Filter = 'all' | ProjectCategory
 
 const FILTERS: readonly { value: Filter; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'academic', label: 'Academic' },
-  { value: 'freelance', label: 'Client Work' },
+  ...PROJECT_CATEGORIES.map(category => ({ value: category, label: CATEGORY_LABELS[category] })),
 ]
 
 export function ProjectsPage() {
@@ -21,7 +26,7 @@ export function ProjectsPage() {
       <title>Projects — Julien Michael Punsalan</title>
       <meta
         name="description"
-        content="Six shipped projects by Julien Michael Punsalan — GrabMeYaya, MJ Quality Cars, IPONLY, CAMPASS, LOFU and the GT Garage client build. Angular, Vue, Flutter, Node.js and more."
+        content={`${projects.length} projects by Julien Michael Punsalan — internship systems, freelance client work and academic builds across React, Angular, Vue, Flutter and Node.js.`}
       />
       <header className="container-x pt-32 md:pt-44">
         <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
@@ -31,8 +36,9 @@ export function ProjectsPage() {
           Built, shipped, <span className="italic text-gold">used.</span>
         </h1>
         <p className="mt-6 max-w-xl leading-relaxed text-fog">
-          Six products — marketplaces, dashboards, booking systems and mobile apps — each designed
-          and built end to end, from first wireframe to production.
+          {countWord(projects.length, { capitalize: true })} products — enterprise systems,
+          marketplaces, dashboards, booking systems and mobile apps — each designed and built end to
+          end, from first wireframe to production.
         </p>
       </header>
 

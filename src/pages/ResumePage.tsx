@@ -8,6 +8,7 @@ import {
   AWARDS,
   CAREER_OBJECTIVE,
   education,
+  experience,
   freelanceProjects,
   LANGUAGES,
   RESUME_PDF,
@@ -26,10 +27,16 @@ function SectionLabel({ id, children }: { id: string; children: ReactNode }) {
   )
 }
 
-function ProjectEntry({ project }: { project: ResumeProject }) {
+type ProjectEntryProps = {
+  project: ResumeProject
+  /** h4 when nested under an experience entry's h3 */
+  headingLevel?: 'h3' | 'h4'
+}
+
+function ProjectEntry({ project, headingLevel: Heading = 'h3' }: ProjectEntryProps) {
   return (
     <article className="border-b border-line pb-6 last:border-b-0 last:pb-0">
-      <h3 className="font-display text-xl font-semibold text-ivory">
+      <Heading className="font-display text-xl font-semibold text-ivory">
         {project.slug ? (
           <Link
             to={`/projects/${project.slug}`}
@@ -45,7 +52,7 @@ function ProjectEntry({ project }: { project: ResumeProject }) {
           project.title
         )}
         <span className="font-display font-normal text-fog italic"> — {project.subtitle}</span>
-      </h3>
+      </Heading>
       <ul className="mt-3 flex flex-col gap-2">
         {project.bullets.map(bullet => (
           <li key={bullet} className="flex items-start gap-3 text-sm leading-relaxed text-fog">
@@ -73,7 +80,7 @@ export function ResumePage() {
       <title>Resume — Julien Michael Punsalan</title>
       <meta
         name="description"
-        content="Resume of Julien Michael Punsalan — BSIT student at Holy Angel University, full-stack developer with 19 certifications, academic and freelance project experience. Download as PDF."
+        content={`Resume of Julien Michael Punsalan — BSIT student at Holy Angel University and full-stack developer intern at Clark International Airport Corporation, with ${certifications.length} certifications and academic, freelance and internship project experience. Download as PDF.`}
       />
 
       <header className="resume-header container-x pt-32 md:pt-44">
@@ -185,6 +192,44 @@ export function ResumePage() {
             </p>
           </section>
 
+          <section aria-labelledby="experience-heading">
+            <SectionLabel id="experience-heading">Experience</SectionLabel>
+            <div className="flex flex-col gap-10">
+              {experience.map(job => (
+                <article key={`${job.organization}-${job.role}`}>
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                    <h3 className="font-display text-2xl font-semibold text-ivory">
+                      {job.role}
+                      <span className="sr-only"> at {job.organization}</span>
+                    </h3>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-gold">
+                      {job.period}
+                    </p>
+                  </div>
+                  <p className="mt-1 text-ivory">{job.organization}</p>
+                  <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-fog">
+                    {job.unit} · {job.location}
+                  </p>
+                  <ul className="mt-4 flex max-w-2xl flex-col gap-2">
+                    {job.duties.map(duty => (
+                      <li key={duty} className="flex items-start gap-3 text-sm leading-relaxed text-fog">
+                        <span className="mt-0.5 text-gold" aria-hidden="true">
+                          ◆
+                        </span>
+                        {duty}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 flex flex-col gap-6 border-l border-gold/30 pl-6">
+                    {job.projects.map(project => (
+                      <ProjectEntry key={project.title} project={project} headingLevel="h4" />
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
           <section aria-labelledby="academic-projects-heading">
             <SectionLabel id="academic-projects-heading">Academic Projects</SectionLabel>
             <div className="flex flex-col gap-6">
@@ -230,7 +275,25 @@ export function ResumePage() {
                       .filter(cert => cert.year === year)
                       .map(cert => (
                         <li key={cert.image} className="border-b border-line pb-2.5 last:border-b-0">
-                          <p className="text-sm text-ivory">{cert.title}</p>
+                          <p className="text-sm text-ivory">
+                            {cert.credentialUrl ? (
+                              <a
+                                href={cert.credentialUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 transition-colors hover:text-gold"
+                              >
+                                {cert.title}
+                                <ArrowUpRight
+                                  className="no-print h-3.5 w-3.5 text-gold"
+                                  aria-hidden="true"
+                                />
+                                <span className="sr-only">(verify credential, opens in new tab)</span>
+                              </a>
+                            ) : (
+                              cert.title
+                            )}
+                          </p>
                           <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fog">
                             {cert.issuer}
                           </p>

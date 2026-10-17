@@ -17,7 +17,7 @@ const EXPERTISE = [
     icon: Database,
     title: 'Backend Development',
     blurb: 'APIs, auth and data layers that stay fast and reliable under real-world use.',
-    skills: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'Supabase'],
+    skills: ['Node.js', 'Express', 'MySQL', 'PostgreSQL', 'MongoDB', 'Supabase'],
   },
   {
     icon: Smartphone,

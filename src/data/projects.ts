@@ -1,10 +1,34 @@
-export type ProjectCategory = 'academic' | 'freelance'
+/** Display order for filters; the type derives from it so every category gets a chip. */
+export const PROJECT_CATEGORIES = ['internship', 'freelance', 'academic'] as const
+
+export type ProjectCategory = (typeof PROJECT_CATEGORIES)[number]
+
+export const CATEGORY_LABELS: Record<ProjectCategory, string> = {
+  internship: 'Internship',
+  freelance: 'Client Work',
+  academic: 'Academic',
+}
+
+export const CATEGORY_DESCRIPTIONS: Record<ProjectCategory, string> = {
+  internship: 'Internship project',
+  freelance: 'Freelance client project',
+  academic: 'Academic project',
+}
+
+/** Real-world work done for an outside organization, counted in the Home stats. */
+export const CATEGORY_IS_INDUSTRY: Record<ProjectCategory, boolean> = {
+  internship: true,
+  freelance: true,
+  academic: false,
+}
 
 export interface Project {
   slug: string
   name: string
   tagline: string
   category: ProjectCategory
+  /** Organization the work was done for, when not academic */
+  organization?: string
   role: string
   goal: string
   features: readonly string[]
@@ -16,6 +40,57 @@ export interface Project {
 }
 
 export const projects: readonly Project[] = [
+  {
+    slug: 'risk-management-system',
+    name: 'Risk Management System',
+    tagline: 'A corporation-wide risk register and analytics platform for Clark International Airport.',
+    category: 'internship',
+    organization: 'Clark International Airport Corporation',
+    role: 'Full-Stack Developer (IT Internship)',
+    goal: 'A web-based risk management platform for Clark International Airport Corporation that centralizes how every department identifies, assesses and tracks organizational risk. Departments file risk reports scored by Risk Priority Number (RPN), an IQAC reviewer validates each one through a review queue, and management gets a live picture of risk across the whole corporation — by classification, by department, and on a severity heat map.',
+    features: [
+      'Risk register with RFN codes plus self-assessed and IQAC-validated RPN scores',
+      'Review workflow — Pending Review, Owned, or Returned for Revision',
+      'Analytics dashboard with risk classification, per-department breakdown and severity heat map',
+      'Role-based access for Department Users, IQAC Reviewers and System Admins',
+      'User management with an enforced password policy and first-login password change',
+      'Account activity log, plus search and filters by department, status and tier',
+    ],
+    tech: ['React', 'Node.js', 'MySQL'],
+    logo: '/projects/ciac-logo-transparent.png',
+    images: [
+      '/projects/RiskManagementSystem2.png',
+      '/projects/RiskManagementSystem1.png',
+      '/projects/RiskManagementSystem3.png',
+      '/projects/RiskManagementSystem4.png',
+    ],
+    featuredOrder: 1,
+  },
+  {
+    slug: 'misd-document-tracking',
+    name: 'MISD Document Tracking System',
+    tagline: 'Every incoming and outgoing document at CIAC’s MIS Division, tracked end to end.',
+    category: 'internship',
+    organization: 'Clark International Airport Corporation',
+    role: 'Full-Stack Developer (IT Internship)',
+    goal: 'An internal tracking log for the Management Information Systems Division (MISD) of Clark International Airport Corporation that replaces paper routing logs. Each incoming or outgoing document gets an MISD reference number, and every hand-off between departments is recorded as a routing round — who received it, when, what action was taken and its status — so staff can see at a glance where any document is and what still needs attention.',
+    features: [
+      'Auto-numbered MISD reference codes for every document',
+      'Incoming and outgoing routing rounds with receiver, timestamps and actions',
+      'Pending, In Process and Complete statuses with live dashboard counters',
+      'Search by MISD no., subject, type or department, with filters and sorting',
+      'Covers CIAC document types — purchase requests, leave and overtime forms, memos, vouchers and more',
+      'Completed-documents archive and data export',
+    ],
+    tech: ['React', 'Node.js', 'MySQL'],
+    logo: '/projects/ciac-logo-transparent.png',
+    images: [
+      '/projects/DocumentTrackingLog1.png',
+      '/projects/DocumentTrackingLog2.png',
+      '/projects/DocumentTrackingLog3.png',
+      '/projects/DocumentTrackingLog4.png',
+    ],
+  },
   {
     slug: 'gt-garage',
     name: 'GT Garage',
@@ -37,7 +112,7 @@ export const projects: readonly Project[] = [
       '/projects/gtgarage3.png',
       '/projects/gtgarage4.png',
     ],
-    featuredOrder: 1,
+    featuredOrder: 2,
   },
   {
     slug: 'grabmeyaya',
@@ -61,7 +136,7 @@ export const projects: readonly Project[] = [
       '/projects/grabmeyaya3.png',
       '/projects/grabmeyaya4.png',
     ],
-    featuredOrder: 2,
+    featuredOrder: 3,
   },
   {
     slug: 'campass',
@@ -80,7 +155,6 @@ export const projects: readonly Project[] = [
     tech: ['Flutter', 'Dart', 'Node.js', 'MongoDB', 'PostgreSQL'],
     logo: '/projects/campass-logo.png',
     images: ['/projects/campass1.png', '/projects/campass2.png'],
-    featuredOrder: 3,
   },
   {
     slug: 'mj-quality-cars',
