@@ -59,8 +59,8 @@ export const projects: readonly Project[] = [
     tech: ['React', 'Node.js', 'MySQL'],
     logo: '/projects/ciac-logo-transparent.png',
     images: [
-      '/projects/RiskManagementSystem2.png',
       '/projects/RiskManagementSystem1.png',
+      '/projects/RiskManagementSystem2.png',
       '/projects/RiskManagementSystem3.png',
       '/projects/RiskManagementSystem4.png',
     ],
